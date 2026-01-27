@@ -11,11 +11,11 @@ Once your integration is tested and working in the sandbox environment, you're r
 
 Before moving to production, ensure you have completed:
 
-✅ **Thorough Testing** - All API endpoints work correctly in sandbox  
-✅ **Error Handling** - Your application handles all error scenarios gracefully  
-✅ **VAST Processing** - Your player correctly processes and displays VAST tags  
-✅ **Tracking Implementation** - All impression and tracking URLs are properly fired  
-✅ **Performance Testing** - Your integration performs well under expected load  
+✅ **Thorough Testing** - All API endpoints work correctly in sandbox\
+✅ **Error Handling** - Your application handles all error scenarios gracefully\
+✅ **VAST Processing** - Your player correctly processes and displays VAST tags\
+✅ **Tracking Implementation** - All impression and tracking URLs are properly fired\
+✅ **Performance Testing** - Your integration performs well under expected load
 
 ## Production Migration Steps
 
@@ -24,44 +24,48 @@ Before moving to production, ensure you have completed:
 Change from sandbox to production endpoint:
 
 **From (Sandbox):**
+
 ```
-https://sandbox-ad.playlog.io
+https://sandbox-ad.lynxssp.com
 ```
 
 **To (Production):**
+
 ```
-https://ad.playlog.io
+https://ad.lynxssp.com
 ```
 
 ### 2. Replace API Key
 
 **Sandbox Key (Remove):**
+
 ```
 f9a3c4b7e2d84f85b3a2a1e3c9f071ac
 ```
 
 **Production Key (Use your actual key):**
+
 - Obtain from your User Settings page
 - Or from Display Details page → Connect Player → API Integration
 
 <Warning>
-Never use the shared sandbox API key in production. Always use your unique production API key.
+  Never use the shared sandbox API key in production. Always use your unique production API key.
 </Warning>
 
 ### 3. Update Identifiers
 
 Replace test identifiers with your real ones:
 
-| Parameter | Sandbox Value | Production Value |
-|-----------|---------------|------------------|
-| `venue_id` | `venue1234` | Your actual venue ID |
+| Parameter   | Sandbox Value   | Production Value       |
+| ----------- | --------------- | ---------------------- |
+| `venue_id`  | `venue1234`     | Your actual venue ID   |
 | `screen_id` | `any-screen-id` | Your actual screen IDs |
 
 ### 4. Production Configuration Example
 
 ```bash
 # Production API Request
-curl -X POST "https://ad.playlog.io/api/v1/ad/request?format=json" \
+curl -X POST "https://ad.lynxssp.com/api/v1/ad/request?format=json" \
   -H "Lynx-Key: your-production-api-key-here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -72,5 +76,5 @@ curl -X POST "https://ad.playlog.io/api/v1/ad/request?format=json" \
 ```
 
 <Info>
-Our support team is available to assist with your production deployment. Contact us if you need guidance or encounter any issues during the transition.
+  Our support team is available to assist with your production deployment. Contact us if you need guidance or encounter any issues during the transition.
 </Info>
