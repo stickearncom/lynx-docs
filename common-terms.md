@@ -1,5 +1,5 @@
 ---
-title: "common-terms.md"
+title: "Common Terms"
 ---
 
 This glossary provides definitions for the key terminologies, metrics, and features used across the Lynx SSP platform to help you manage your campaigns, inventory, and reporting effectively.
