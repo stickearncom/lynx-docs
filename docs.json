@@ -316,6 +316,12 @@
                 ]
               }
             ]
+          },
+          {
+            "group": "Resource & Support",
+            "pages": [
+              "common-terms"
+            ]
           }
         ]
       },
