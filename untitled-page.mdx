@@ -1,0 +1,228 @@
+---
+title: "Venue Taxonomy"
+---
+
+This page defines the venue categories used when creating or updating DOOH inventory in Lynx SSP.
+
+Lynx SSP uses the OpenOOH/IAB DOOH Venue Taxonomy v1.2.1 to describe the physical environment around a DOOH screen. A shared taxonomy helps buyers compare inventory across supply platforms and target similar environments consistently.
+
+## Why venue standardization matters
+
+DOOH screens are located in many different environments, including airports, shopping malls, offices, roadsides, transit systems, and residential buildings. Without a shared classification, the same environment may be described differently by each media owner or supply platform.
+
+The OpenOOH taxonomy provides a common language for media owners, SSPs, DSPs, and media buyers. It improves venue-based targeting, reduces ambiguity during campaign planning, and makes DOOH inventory easier to package and compare across supply platforms.
+
+## How the taxonomy works
+
+Lynx SSP uses two levels:
+
+| Level | Description |
+| :-- | :-- |
+| Parent venue | A broad environment category, such as Retail, Transit, or Outdoor. |
+| Child venue | A more specific environment under the parent, such as Mall, Airport, or Billboard. |
+
+When selecting a venue, choose the most accurate parent and child combination available. Grandchild categories exist in the OpenOOH specification but are not currently used in the Lynx inventory form.
+
+## When to select a venue
+
+Select a venue when creating or updating a DOOH screen. Venue classification is required for specification (see Specification, Type & Category):
+
+• Roadside
+
+• Place-Based
+
+• Fleet
+
+Choose the venue based on the physical environment and audience around the screen, not only on the screen format, resolution, or advertising size.
+
+## Parent venue categories
+
+| ID | Parent venue | Description |
+| :-- | :-- | :-- |
+| 1 | Transit | Locations connected to passenger transportation, such as airports, buses, trains, subways, and ferries. |
+| 2 | Retail | Locations where consumers visit to purchase products or services. |
+| 3 | Outdoor | Outdoor environments and public-facing displays, including billboards, urban panels, and bus shelters. |
+| 4 | Health & Beauty | Locations focused on fitness, beauty, personal care, or wellness services. |
+| 5 | Point of Care | Medical and healthcare locations where people receive treatment or professional care. |
+| 6 | Education | Schools and higher-education environments. |
+| 7 | Office Building | Commercial buildings used mainly for offices or business operations. |
+| 8 | Entertainment | Locations for leisure, recreation, dining, hospitality, sports, and entertainment. |
+| 9 | Government | Government facilities and public-service locations. |
+| 10 | Financial | Locations providing financial services, such as banks. |
+| 11 | Residential | Residential buildings and housing environments. |
+
+## Child venue categories
+
+### 01 — Transit
+
+| ID | Child venue | Description |
+| :-- | :-- | :-- |
+| 101 | Airport | Screens located in airport terminals, arrival areas, departure areas, baggage claim, gates, concourses, or airport retail areas. |
+| 102 | Bus | Screens located inside or on city and intercity buses. |
+| 103 | Taxi & Rideshare TV | Screens located inside taxis or rideshare vehicles, typically visible to passengers. |
+| 105 | Subway | Screens located inside subway trains, stations, or subway platforms. |
+| 106 | Train | Screens located inside trains, train stations, or train platforms. |
+| 107 | Ferry | Screens located inside passenger ferries or related ferry environments. |
+| 108 | Tram | Screens located inside trams, on trams, or at tram stations. |
+| 109 | Highway Rest Area | Screens located at highway rest areas or service stops for drivers. |
+
+Important: Taxi & Rideshare TV is only for screens inside taxi or rideshare vehicles. It is not a general DOOH category.
+
+### 02 — Retail
+
+| ID | Child venue | Description |
+| :-- | :-- | :-- |
+| 201 | Fueling Station | Locations where drivers purchase fuel or charge vehicles. |
+| 202 | Convenience Store | Small retail stores with extended hours and everyday goods. |
+| 203 | Grocery | Retail stores that primarily sell food and groceries. |
+| 204 | Liquor Store | Retail stores that primarily sell packaged alcoholic beverages. |
+| 205 | Mall | Shopping malls or connected retail complexes with multiple stores and services. |
+| 206 | Cannabis Dispensary | Stores that sell cannabis or CBD products. |
+| 207 | Pharmacy | Stores where medicinal drugs and related products are sold. |
+| 208 | Parking Garage | Buildings or facilities where people park vehicles. |
+| 209 | Furniture | Stores that sell furniture and related home products. |
+| 210 | Apparel | Stores that sell clothing and personal accessories. |
+| 211 | Automotive | Locations that sell, service, or maintain motor vehicles. |
+| 212 | Laundromat | Public facilities with self-service washing and drying machines. |
+| 213 | Vape Shop | Stores that sell vaping products. |
+| 214 | Mass Merchandising | Retail locations offering a wide range of products, often at scale. |
+| 215 | Consumer Electronic | Stores that sell personal or household electronic devices. |
+| 216 | Retail Other | Retail environments not represented by another child category. |
+| 217 | Sporting Good | Stores that sell sporting equipment, apparel, or related products. |
+| 218 | Pet Store | Stores that sell pets, pet food, or pet-care products. |
+| 219 | Office Supply | Stores that sell office supplies and related products. |
+| 220 | Home Renovation | Stores that sell home-improvement, repair, or renovation products. |
+
+### 03 — Outdoor
+
+| ID | Child venue | Description |
+| :-- | :-- | :-- |
+| 301 | Billboard | Large outdoor displays primarily visible to drivers and pedestrians. |
+| 302 | Urban Panel | Digital displays in urban environments, often serving pedestrians and public spaces. |
+| 303 | Bus Shelter | Displays located inside or around shelters where people wait for buses. |
+| 304 | Spectacular | Large-format or specially positioned displays in premium locations. |
+| 305 | Window Panel | Displays located in or directly behind a building window. |
+| 306 | Moving Billboard | Displays attached to or built into the side or rear of a vehicle or boat. |
+| 307 | Car Top | Displays installed on top of taxi or rideshare vehicles. |
+| 308 | Aerial | Displays carried or displayed in the air. |
+| 309 | EV Charging Station | Displays associated with electric-vehicle charging infrastructure. |
+
+### 04 — Health & Beauty
+
+| ID | Child venue | Description |
+| :-- | :-- | :-- |
+| 401 | Gym | Fitness clubs, exercise facilities, or gyms. |
+| 402 | Salon | Beauty salons or establishments providing hair, beauty, or personal-care services. |
+| 403 | Spa | Establishments providing wellness, beauty, massage, or spa treatments. |
+| 404 | Tattoo | Establishments providing professional tattoo services. |
+
+### 05 — Point of Care
+
+| ID | Child venue | Description |
+| :-- | :-- | :-- |
+| 501 | Doctor’s Office | Non-hospital medical facilities operated by physicians. |
+| 502 | Veterinary Office | Facilities where veterinary professionals treat animals. |
+| 503 | Dentist Office | Facilities where dental professionals provide oral healthcare. |
+| 504 | Hospital | Institutions providing medical, surgical, and nursing care. |
+| 505 | Urgent Care | Clinics providing prompt treatment for non-life-threatening illness or injury. |
+| 506 | Physiotherapy | Healthcare facilities focused on restoring movement and physical function. |
+
+### 06 — Education
+
+| ID | Child venue | Description |
+| :-- | :-- | :-- |
+| 601 | School | Primary or secondary education institutions. |
+| 602 | College and University | Higher-education institutions and university environments. |
+
+### 07 — Office Building
+
+| ID | Child venue | Description |
+| :-- | :-- | :-- |
+| 701 | Office Building | Commercial buildings containing spaces mainly used for offices. |
+| 702 | Warehouse | Buildings used to store materials or manufactured goods. |
+
+### 08 — Entertainment
+
+| ID | Child venue | Description |
+| :-- | :-- | :-- |
+| 801 | Recreational Location | Locations where recreational or leisure activities take place. |
+| 802 | Movie Theater | Locations where long-format content is shown on large screens. |
+| 803 | Sports Entertainment | Venues where people watch or participate in sports and related activities. |
+| 804 | Bar | Businesses that primarily serve alcoholic beverages. |
+| 805 | Casual Dining | Restaurants offering moderately priced food in a casual environment. |
+| 806 | QSR | Quick-service or fast-food restaurants with limited table service. |
+| 807 | Hotel | Establishments providing accommodation and services for travelers. |
+| 808 | Golf Cart | Locations or environments associated with golf carts and golf activities. |
+| 809 | Night Club | Nighttime entertainment venues offering music, dancing, and drinks. |
+| 810 | High-End Dining | Formal or premium restaurants offering expensive dining experiences. |
+| 811 | Casinos | Locations where gambling activities take place. |
+| 812 | Convention Center | Facilities for conventions, trade shows, exhibitions, and large events. |
+
+### 09 — Government
+
+| ID | Child venue | Description |
+| :-- | :-- | :-- |
+| 901 | DMV | Government facilities that provide driver and motor-vehicle services. |
+| 902 | Military Base | Facilities used for military operations, training, or personnel housing. |
+| 903 | Post Office | Facilities that process and deliver mail and packages. |
+| 904 | First Responder Facility | Facilities for police, fire, emergency medical, or other first responders. |
+
+### 10 — Financial
+
+| ID | Child venue | Description |
+| :-- | :-- | :-- |
+| 1001 | Bank | Financial institutions that provide banking and money-related services. |
+
+### 11 — Residential
+
+| ID | Child venue | Description |
+| :-- | :-- | :-- |
+| 1101 | Apartment Building and Condominium | Residential buildings containing multiple housing units. |
+
+## Common examples
+
+| Screen environment | Parent venue | Child venue |
+| :-- | :-- | :-- |
+| Airport screen | Transit | Airport |
+| Shopping mall screen | Retail | Mall |
+| Grocery-store screen | Retail | Grocery |
+| Train-station screen | Transit | Train |
+| Office-building screen | Office Building | Office Building |
+| Apartment or condominium screen | Residential | Apartment Building and Condominium |
+| Roadside billboard | Outdoor | Billboard |
+| Screen inside a beauty salon | Health & Beauty | Salon |
+| Medical clinic screen | Point of Care | Doctor’s Office or the applicable medical category |
+
+## How venue types improve DSP targeting
+
+Venue classification gives DSPs a consistent signal about the environment and audience around a screen. This allows buyers to target specific DOOH contexts instead of treating all screens as the same inventory.
+
+| DSP targeting need | Example venue selection | Targeting impact |
+| :-- | :-- | :-- |
+| Reach travelers | Transit → Airport | Buyers can focus on screens in airport environments and passenger areas. |
+| Reach commuters | Transit → Train or Subway | Buyers can target screens associated with train, subway, or commuter journeys. |
+| Reach shoppers | Retail → Mall or Grocery | Buyers can select retail environments where consumers are shopping. |
+| Reach roadside audiences | Outdoor → Billboard or Urban Panel | Buyers can target outdoor screens visible to drivers and pedestrians. |
+| Reach office audiences | Office Building → Office Building | Buyers can focus on screens in business and workplace environments. |
+| Reach residential audiences | Residential → Apartment Building and Condominium | Buyers can target screens near residential communities. |
+| Reach wellness audiences | Health & Beauty → Gym, Salon, or Spa | Buyers can select fitness, beauty, and wellness environments. |
+| Reach healthcare audiences | Point of Care → Doctor’s Office or Urgent Care | Buyers can target screens in medical-care environments. |
+| Reach entertainment audiences | Entertainment → Movie Theater, Sports Entertainment, or Recreational Location | Buyers can select leisure and entertainment environments. |
+
+Standardized parent and child values help buyers compare similar inventory across different supply sources. The parent supports broader targeting, while the child provides more specific targeting. For example, a buyer can target all Retail environments or narrow the campaign to Retail → Mall.
+
+Accurate classification also helps reduce irrelevant bid opportunities. A screen in a mall should not be represented as a roadside billboard, and a screen inside a clinic should not be represented as a general retail screen. Select the category that best matches the actual physical environment so buyers can make reliable targeting decisions.
+
+## Choosing the correct category
+
+Choose the category that best describes the physical environment and the audience around the screen.
+
+For beauty-related locations, use Health & Beauty → Salon or Health & Beauty → Spa for non-medical beauty and wellness services. Use Point of Care → Doctor’s Office, Urgent Care, or another applicable medical category for a medical clinic.
+
+Do not select a category based only on the screen name, resolution, or advertising format. If the correct venue is unclear, contact the inventory or operations team before saving the screen.
+
+## Related standards
+
+[OpenOOH Venue Taxonomy v1.2.1](https://github.com/openooh/venue-taxonomy/blob/main/specification-1.2.md) — official venue definitions and IDs.
+
+[IAB OpenRTB 2.6 Specification](https://github.com/InteractiveAdvertisingBureau/openrtb2.x/blob/main/2.6.md) — real-time bidding reference for programmatic advertising.
