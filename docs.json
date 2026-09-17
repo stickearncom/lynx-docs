@@ -45,6 +45,7 @@
             "pages": [
               "documentation/inventory/display",
               "documentation/inventory/specification-type-and-category",
+              "venue-taxonomy",
               {
                 "group": "DOOH",
                 "expanded": true,
@@ -56,8 +57,7 @@
                       "documentation/inventory/dooh/add/how-to-add",
                       "documentation/inventory/dooh/add/roadside",
                       "documentation/inventory/dooh/add/place-based",
-                      "documentation/inventory/dooh/add/fleet",
-                      "venue-taxonomy"
+                      "documentation/inventory/dooh/add/fleet"
                     ]
                   },
                   {
