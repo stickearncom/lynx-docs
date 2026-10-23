@@ -1,0 +1,170 @@
+---
+title: "Ad Request V2"
+api: "POST https://sandbox-ad.lynxssp.com/api/v2/ad/request"
+description: "Request an ad from the Lynx SSP platform (V2)"
+---
+
+## Overview
+
+
+Call the API to request an ad using the new V2 endpoint. This informs **LynxSSP** that an ad space is available and ready to be filled. The V2 endpoint provides a more detailed response and improved tracking.
+
+<Info>
+For development or testing, use the sandbox endpoint below. Replace credentials and IDs with your actual values for production.
+</Info>
+
+## Authentication
+
+All API requests require authentication using the `lynx-key` header. See [Authentication](/api-reference/ad-serving/authentication) for details.
+
+## Request Headers
+
+<ParamField header="lynx-key" type="string" required default="f9a3c4b7e2d84f85b3a2a1e3c9f071ac">
+  Unique authentication key for your account
+</ParamField>
+
+## Query Parameters
+
+No query parameters are required for this endpoint.
+
+## Request Body
+
+<ParamField body="venue_id" type="string" required default="venue1234">
+  The venue ID making the ad request. This should be your unique venue identifier.
+</ParamField>
+
+<ParamField body="screen_id" type="string" required default="testing">
+  The screen ID within the venue making the ad request.
+</ParamField>
+
+<ParamField body="play_time" type="integer" required default="1770353697">
+  The UTC epoch seconds at which you expect to show the ad.
+</ParamField>
+
+## Response
+
+<ResponseField name="ad_request_uuid" type="string" required>
+  Unique identifier for the ad request. Use this for tracking and proof of play.
+</ResponseField>
+
+<ResponseField name="ad_request_expired_at" type="integer" required>
+  UTC epoch seconds when the ad is no longer valid to play.
+</ResponseField>
+
+<ResponseField name="venue_id" type="string" required>
+  The `venue_id` sent in the ad request.
+</ResponseField>
+
+<ResponseField name="screen_id" type="string" required>
+  The `screen_id` sent in the ad request.
+</ResponseField>
+
+<ResponseField name="creative_id" type="integer" required>
+  The ID of the creative returned for this ad request.
+</ResponseField>
+
+
+<ResponseField name="advertisement" type="object" required>
+  The advertisement object containing media and tracking information. Structure:
+
+  - **media** (object):
+    - **url** (string): URL to the ad media file (e.g., video).
+    - **width** (integer): Width of the media in pixels.
+    - **height** (integer): Height of the media in pixels.
+    - **duration** (integer): Duration of the media in seconds.
+    - **bitrate** (integer): Bitrate of the media in kbps.
+    - **type** (string): MIME type of the media (e.g., "video/mp4").
+  - **tracking** (object):
+    - **impression** (array of string): URLs to be triggered for ad impressions.
+    - **events** (object): URLs to be triggered at each playback event. Contains:
+      - **start** (array of url)
+      - **firstQuartile** (array of url)
+      - **midpoint** (array of url)
+      - **thirdQuartile** (array of url)
+      - **complete** (array of url)
+    - **error** (array of string): URLs to be triggered on playback error.
+</ResponseField>
+
+<Warning>
+The **advertisement** object includes media details and tracking URLs. Your player **must trigger all impression and event URLs** for proper reporting.
+</Warning>
+
+## Empty Response
+
+**HTTP Status Code:** `204 No Content`
+
+If there are no ads available for the given parameters, the endpoint returns a successful response with no body content.
+
+## Example Request
+
+<Info>
+This example uses sandbox credentials. For production, replace with your actual API key and venue/screen IDs.
+</Info>
+
+```bash
+curl --location 'https://sandbox-ad.lynxssp.com/api/v2/ad/request' \
+--header 'Content-Type: application/json' \
+--header 'lynx-key: f9a3c4b7e2d84f85b3a2a1e3c9f071ac' \
+--data '{
+    "venue_id": "anwar123", 
+    "screen_id": "test02022026",
+    "play_time": 1770353697 
+}'
+```
+
+## Example Response
+
+```json
+{
+  "status": 200,
+  "data": {
+    "ad_request_uuid": "xjaqcd1sn-1770352718359",
+    "ad_request_expired_at": 1770359097,
+    "venue_id": "anwar123",
+    "screen_id": "test02022026",
+    "creative_id": 1,
+    "advertisement": {
+      "media": {
+        "url": "https://v.adsrvr.org/conk3h1/mx60l90/qj1fjrcf/hp3vxpte_5_9999.mp4",
+        "width": 1080,
+        "height": 1920,
+        "duration": 15,
+        "bitrate": 8346,
+        "type": "video/mp4"
+      },
+      "tracking": {
+        "impression": [
+          "https://enduser.adsrvr.org/enduser/pie/?pie=22&rtb=dD0xJmlpZD00MzY4ZTMxYS0zYTRlLTRjZGQtYjBhNy1jYmUyYjBiZDMwNDEmY3JpZD1ocDN2eHB0ZSZ3cD0ke0FVQ1RJT05fUFJJQ0V9JmFpZD0xJndwYz1JRFImc2ZlPTE5ZjNiZTJkJnB1aWQ9JmJkYz0xNCZ0ZGlkPSZwaWQ9Y29uazNoMSZhZz16dGRheGtxJmFkdj1teDYwbDkwJmJwPTc3MDguOTQ1NDczMjgyNTgzMjI1NDc0MDIzMDUzNiZjZj04MzEzNTM4JmZxPTAmdGRfcz0wOWQyMTdlNy0xOWRiLTQxYWItOTQzNi03Mzc2ZGMzYmM2M2QmcmNhdHM9Jm1zdGU9Jm1mbGQ9MiZtc3NpPSZtZnNpPSZ1aG93PTQwJmFnc2E9JnJnej0xMDExMCZzdmJ0dGQ9MSZkdD1PdXRPZkhvbWUmb3NmPVdpbmRvd3Mmb3M9V2luZG93czEwJmJyPUNocm9tZSZybGFuZ3M9MDEmbWxhbmc9JnN2cGlkPWM2OTA5YWUzLTY1MTYtNDg2MS04NGE0LTVjZDM1OThkNzk5OSZkaWQ9UEdfTml2ZWFOaWdodF9NUlRVbmRlcmdyb3VuZF8yMDI1MDImcmN4dD1PdGhlciZsYXQ9Jmxvbj0mdG1wYz0mZGFpZD0mdnA9MCZvc2k9Jm9zdj0mc2Z0PTMmYng9NjAmbWs9SFAmdnBiPVVuZGVjbGFyZWQmY2M9Mn5LTFV2X1dNZHFSRU02UUNOQ3dCRFVEMVJPVUZST2JZdG5HdEZzNXFaSmJ2Nk1TUllQalh6VFpsbFY1aUxDd2lmeFhZeW1rZkhvc0xxa21mcTBJUWVYazRQR21neU5LY05Td0YtMXJSUlNURXl3ekU4WlZWR3F1ckZqWXVWRkJXbkc5V2FXSTVucUJSTE83ZFFxRTlCNnFwQnAwR2FwTHlFT0RFb3N1RGFuRW1ya3BiYVUzQnNjTzZFYmExWTJKZnhxUHZZNVJFdDZKVUJaMFhHZ3JDbVQ1d1VWemMtU0hwYy1XR0pTYUVYZVU3cnM2OXJWVlZ4LVBJTmJYNmYtZDcyNzFqdWMxaExSWmdXYWI1VnFzWE9VcVhWbVZTbkxHVzhGdUNKeEVjNGJXcjEzZ3FIb1VMSURSTXFiX0VQaUdOUFdhaENucXhZT1RlaFViNnFnbFNWS3kxMDY1eGFFQ0w4OElxZ1ZXQ2dza2hmRkluekVNQ1hrUy1kQklIc1VUY1pNSUhyYi1LT1lSNTJTd0g4ZzRjXzNTXzE0RTBkTzdlend0TFItWi15eUl4V2FlbXhlUy1xN0xDSWRmdm5fUmQzRXlvS2JSYkNXRTRXeWdQVVQ5VUk4aWdDa3NIc1RQQWFpMzlyT3Z2MHlpbDFWSFhLbXZIRzhzN0VBTUdNYXV3LiZkdXI9JmNycmVscj0mcHBpZj0xJnNhaWQ9ZW5ueWw0dnBuLTE3NDAzODk5MzMxMjEmaWN0PUV0aGVybmV0JmltcHg9MTg0JmRvb2h2PTAxMDMmYXVjdD0zJmltPTEmbWM9MDZhZWExN2MtYzhkMC00N2ZmLTg2ZmYtZGMyMWI0ZDBkMWU0JmV2PUhfLWpjaXNIb1ZvOW9nNjFaMEZKSjB1WGpxRFlxOVNRVmRPZ1lZdF90ejguJmFicj0mc3Y9bHlueA..",
+          "https://sandbox-ad.lynxssp.com/api/v2/ad/callback/?ad_request_uuid=xjaqcd1sn-1770352718359&dealName=sandbox_deal&dealId=sandbox_deal"
+        ],
+        "events": {
+          "start": [
+            "https://enduser.adsrvr.org/enduser/video/?ve=start&imp=4368e31a-3a4e-4cdd-b0a7-cbe2b0bd3041&ag=ztdaxkq&crid=hp3vxpte&cf=8313538&fq=0&t=1&td_s=09d217e7-19db-41ab-9436-7376dc3bc63d&rcats=&mste=&mfld=2&mssi=&mfsi=&sv=lynx&uhow=40&agsa=&wp=${AUCTION_PRICE}&rgz=10110&dt=OutOfHome&osf=Windows&os=Windows10&br=Chrome&svpid=c6909ae3-6516-4861-84a4-5cd3598d7999&rlangs=01&mlang=&did=PG_NiveaNight_MRTUnderground_202502&rcxt=Other&tmpc=&vrtd=14,15&osi=&osv=&daid=&dnr=0&vpb=Undeclared&crrelr=&npt=&cc=2~KLUv_WMdqREM6QCNCwBDUD1ROUFRObYtnGtFs5qZJbv6MSRYPjXzTZllV5iLCwifxXYymkfHosLqkmfq0IQeXk4PGmgyNKcNSwF-1rRRSTEywzE8ZVVGqurFjYuVFBWnG9WaWI5nqBRLO7dQqE9B6qpBp0GapLyEODEosuDanEmrkpbaU3BscO6Eba1Y2JfxqPvY5REt6JUBZ0XGgrCmT5wUVzc-SHpc-WGJSaEXeU7rs69rVVVx-PINbX6f-d7271juc1hLRZgWab5VqsXOUqXVmVSnLGW8FuCJxEc4bWr13gqHoULIDRMqb_EPiGNPWahCnqxYOTehUb6qglSVKy1065xaECL88IqgVWCgskhfFInzEMCXkS-dBIHsUTcZMIHrb-KOYR52SwH8g4c_3S_14E0dO7ezwtLR-Z-yyIxWaemxeS-q7LCIdfvn_Rd3EyoKbRbCWE4WygPUT9UI8igCksHsTPAai39rOvv0yil1VHXKmvHG8s7EAMGMauw.&dur=&durs=&bdc=14&mk=HP&ict=Ethernet&said=ennyl4vpn-1740389933121&impx=184&doohv=0103&auct=3&sfe=1bbcf04f&vp=0&ast=[ASSETURI]",
+            "https://sandbox-ad.lynxssp.com/api/ad-exchange/tracking/event?adexchangeId=op6d7faa8-1744784597433&eventType=start"
+          ],
+          "firstQuartile": [
+            "https://enduser.adsrvr.org/enduser/video/?ve=firstQuartile&imp=4368e31a-3a4e-4cdd-b0a7-cbe2b0bd3041&ag=ztdaxkq&crid=hp3vxpte&cf=8313538&fq=0&t=1&td_s=09d217e7-19db-41ab-9436-7376dc3bc63d&rcats=&mste=&mfld=2&mssi=&mfsi=&sv=lynx&uhow=40&agsa=&wp=${AUCTION_PRICE}&rgz=10110&dt=OutOfHome&osf=Windows&os=Windows10&br=Chrome&svpid=c6909ae3-6516-4861-84a4-5cd3598d7999&rlangs=01&mlang=&did=PG_NiveaNight_MRTUnderground_202502&rcxt=Other&tmpc=&vrtd=14,15&osi=&osv=&daid=&dnr=0&vpb=Undeclared&crrelr=&npt=&cc=2~KLUv_WMdqREM6QCNCwBDUD1ROUFRObYtnGtFs5qZJbv6MSRYPjXzTZllV5iLCwifxXYymkfHosLqkmfq0IQeXk4PGmgyNKcNSwF-1rRRSTEywzE8ZVVGqurFjYuVFBWnG9WaWI5nqBRLO7dQqE9B6qpBp0GapLyEODEosuDanEmrkpbaU3BscO6Eba1Y2JfxqPvY5REt6JUBZ0XGgrCmT5wUVzc-SHpc-WGJSaEXeU7rs69rVVVx-PINbX6f-d7271juc1hLRZgWab5VqsXOUqXVmVSnLGW8FuCJxEc4bWr13gqHoULIDRMqb_EPiGNPWahCnqxYOTehUb6qglSVKy1065xaECL88IqgVWCgskhfFInzEMCXkS-dBIHsUTcZMIHrb-KOYR52SwH8g4c_3S_14E0dO7ezwtLR-Z-yyIxWaemxeS-q7LCIdfvn_Rd3EyoKbRbCWE4WygPUT9UI8igCksHsTPAai39rOvv0yil1VHXKmvHG8s7EAMGMauw.&dur=&durs=&bdc=14&mk=HP&ict=Ethernet&said=ennyl4vpn-1740389933121&impx=184&doohv=0103&auct=3&sfe=1bbcf04f&vp=0",
+            "https://sandbox-ad.lynxssp.com/api/ad-exchange/tracking/event?adexchangeId=op6d7faa8-1744784597433&eventType=firstQuartile"
+          ],
+          "midpoint": [
+            "https://enduser.adsrvr.org/enduser/video/?ve=midpoint&imp=4368e31a-3a4e-4cdd-b0a7-cbe2b0bd3041&ag=ztdaxkq&crid=hp3vxpte&cf=8313538&fq=0&t=1&td_s=09d217e7-19db-41ab-9436-7376dc3bc63d&rcats=&mste=&mfld=2&mssi=&mfsi=&sv=lynx&uhow=40&agsa=&wp=${AUCTION_PRICE}&rgz=10110&dt=OutOfHome&osf=Windows&os=Windows10&br=Chrome&svpid=c6909ae3-6516-4861-84a4-5cd3598d7999&rlangs=01&mlang=&did=PG_NiveaNight_MRTUnderground_202502&rcxt=Other&tmpc=&vrtd=14,15&osi=&osv=&daid=&dnr=0&vpb=Undeclared&crrelr=&npt=&cc=2~KLUv_WMdqREM6QCNCwBDUD1ROUFRObYtnGtFs5qZJbv6MSRYPjXzTZllV5iLCwifxXYymkfHosLqkmfq0IQeXk4PGmgyNKcNSwF-1rRRSTEywzE8ZVVGqurFjYuVFBWnG9WaWI5nqBRLO7dQqE9B6qpBp0GapLyEODEosuDanEmrkpbaU3BscO6Eba1Y2JfxqPvY5REt6JUBZ0XGgrCmT5wUVzc-SHpc-WGJSaEXeU7rs69rVVVx-PINbX6f-d7271juc1hLRZgWab5VqsXOUqXVmVSnLGW8FuCJxEc4bWr13gqHoULIDRMqb_EPiGNPWahCnqxYOTehUb6qglSVKy1065xaECL88IqgVWCgskhfFInzEMCXkS-dBIHsUTcZMIHrb-KOYR52SwH8g4c_3S_14E0dO7ezwtLR-Z-yyIxWaemxeS-q7LCIdfvn_Rd3EyoKbRbCWE4WygPUT9UI8igCksHsTPAai39rOvv0yil1VHXKmvHG8s7EAMGMauw.&dur=&durs=&bdc=14&mk=HP&ict=Ethernet&said=ennyl4vpn-1740389933121&impx=184&doohv=0103&auct=3&sfe=1bbcf04f&vp=0",
+            "https://sandbox-ad.lynxssp.com/api/ad-exchange/tracking/event?adexchangeId=op6d7faa8-1744784597433&eventType=midpoint"
+          ],
+          "thirdQuartile": [
+            "https://enduser.adsrvr.org/enduser/video/?ve=thirdQuartile&imp=4368e31a-3a4e-4cdd-b0a7-cbe2b0bd3041&ag=ztdaxkq&crid=hp3vxpte&cf=8313538&fq=0&t=1&td_s=09d217e7-19db-41ab-9436-7376dc3bc63d&rcats=&mste=&mfld=2&mssi=&mfsi=&sv=lynx&uhow=40&agsa=&wp=${AUCTION_PRICE}&rgz=10110&dt=OutOfHome&osf=Windows&os=Windows10&br=Chrome&svpid=c6909ae3-6516-4861-84a4-5cd3598d7999&rlangs=01&mlang=&did=PG_NiveaNight_MRTUnderground_202502&rcxt=Other&tmpc=&vrtd=14,15&osi=&osv=&daid=&dnr=0&vpb=Undeclared&crrelr=&npt=&cc=2~KLUv_WMdqREM6QCNCwBDUD1ROUFRObYtnGtFs5qZJbv6MSRYPjXzTZllV5iLCwifxXYymkfHosLqkmfq0IQeXk4PGmgyNKcNSwF-1rRRSTEywzE8ZVVGqurFjYuVFBWnG9WaWI5nqBRLO7dQqE9B6qpBp0GapLyEODEosuDanEmrkpbaU3BscO6Eba1Y2JfxqPvY5REt6JUBZ0XGgrCmT5wUVzc-SHpc-WGJSaEXeU7rs69rVVVx-PINbX6f-d7271juc1hLRZgWab5VqsXOUqXVmVSnLGW8FuCJxEc4bWr13gqHoULIDRMqb_EPiGNPWahCnqxYOTehUb6qglSVKy1065xaECL88IqgVWCgskhfFInzEMCXkS-dBIHsUTcZMIHrb-KOYR52SwH8g4c_3S_14E0dO7ezwtLR-Z-yyIxWaemxeS-q7LCIdfvn_Rd3EyoKbRbCWE4WygPUT9UI8igCksHsTPAai39rOvv0yil1VHXKmvHG8s7EAMGMauw.&dur=&durs=&bdc=14&mk=HP&ict=Ethernet&said=ennyl4vpn-1740389933121&impx=184&doohv=0103&auct=3&sfe=1bbcf04f&vp=0",
+            "https://sandbox-ad.lynxssp.com/api/ad-exchange/tracking/event?adexchangeId=op6d7faa8-1744784597433&eventType=thirdQuartile"
+          ],
+          "complete": [
+            "https://enduser.adsrvr.org/enduser/video/?ve=complete&imp=4368e31a-3a4e-4cdd-b0a7-cbe2b0bd3041&ag=ztdaxkq&crid=hp3vxpte&cf=8313538&fq=0&t=1&td_s=09d217e7-19db-41ab-9436-7376dc3bc63d&rcats=&mste=&mfld=2&mssi=&mfsi=&sv=lynx&uhow=40&agsa=&wp=${AUCTION_PRICE}&rgz=10110&dt=OutOfHome&osf=Windows&os=Windows10&br=Chrome&svpid=c6909ae3-6516-4861-84a4-5cd3598d7999&rlangs=01&mlang=&did=PG_NiveaNight_MRTUnderground_202502&rcxt=Other&tmpc=&vrtd=14,15&osi=&osv=&daid=&dnr=0&vpb=Undeclared&crrelr=&npt=&cc=2~KLUv_WMdqREM6QCNCwBDUD1ROUFRObYtnGtFs5qZJbv6MSRYPjXzTZllV5iLCwifxXYymkfHosLqkmfq0IQeXk4PGmgyNKcNSwF-1rRRSTEywzE8ZVVGqurFjYuVFBWnG9WaWI5nqBRLO7dQqE9B6qpBp0GapLyEODEosuDanEmrkpbaU3BscO6Eba1Y2JfxqPvY5REt6JUBZ0XGgrCmT5wUVzc-SHpc-WGJSaEXeU7rs69rVVVx-PINbX6f-d7271juc1hLRZgWab5VqsXOUqXVmVSnLGW8FuCJxEc4bWr13gqHoULIDRMqb_EPiGNPWahCnqxYOTehUb6qglSVKy1065xaECL88IqgVWCgskhfFInzEMCXkS-dBIHsUTcZMIHrb-KOYR52SwH8g4c_3S_14E0dO7ezwtLR-Z-yyIxWaemxeS-q7LCIdfvn_Rd3EyoKbRbCWE4WygPUT9UI8igCksHsTPAai39rOvv0yil1VHXKmvHG8s7EAMGMauw.&dur=&durs=&bdc=14&mk=HP&ict=Ethernet&said=ennyl4vpn-1740389933121&impx=184&doohv=0103&auct=3&sfe=1bbcf04f&vp=0",
+            "https://sandbox-ad.lynxssp.com/api/ad-exchange/tracking/event?adexchangeId=op6d7faa8-1744784597433&eventType=complete"
+          ]
+        },
+        "error": [
+          "https://enduser.adsrvr.org/enduser/video/?ve=error&vec=[ERRORCODE]&ast=[ASSETURI]&imp=4368e31a-3a4e-4cdd-b0a7-cbe2b0bd3041&ag=ztdaxkq&crid=hp3vxpte&cf=8313538&fq=0&t=1&td_s=09d217e7-19db-41ab-9436-7376dc3bc63d&rcats=&mste=&mfld=2&mssi=&mfsi=&sv=lynx&uhow=40&agsa=&wp=${AUCTION_PRICE}&rgz=10110&dt=OutOfHome&osf=Windows&os=Windows10&br=Chrome&svpid=c6909ae3-6516-4861-84a4-5cd3598d7999&rlangs=01&mlang=&did=PG_NiveaNight_MRTUnderground_202502&rcxt=Other&tmpc=&vrtd=14,15&osi=&osv=&daid=&dnr=0&vpb=Undeclared&crrelr=&npt=&cc=2~KLUv_WMdqREM6QCNCwBDUD1ROUFRObYtnGtFs5qZJbv6MSRYPjXzTZllV5iLCwifxXYymkfHosLqkmfq0IQeXk4PGmgyNKcNSwF-1rRRSTEywzE8ZVVGqurFjYuVFBWnG9WaWI5nqBRLO7dQqE9B6qpBp0GapLyEODEosuDanEmrkpbaU3BscO6Eba1Y2JfxqPvY5REt6JUBZ0XGgrCmT5wUVzc-SHpc-WGJSaEXeU7rs69rVVVx-PINbX6f-d7271juc1hLRZgWab5VqsXOUqXVmVSnLGW8FuCJxEc4bWr13gqHoULIDRMqb_EPiGNPWahCnqxYOTehUb6qglSVKy1065xaECL88IqgVWCgskhfFInzEMCXkS-dBIHsUTcZMIHrb-KOYR52SwH8g4c_3S_14E0dO7ezwtLR-Z-yyIxWaemxeS-q7LCIdfvn_Rd3EyoKbRbCWE4WygPUT9UI8igCksHsTPAai39rOvv0yil1VHXKmvHG8s7EAMGMauw.&dur=&durs=&bdc=14&mk=HP&ict=Ethernet&said=ennyl4vpn-1740389933121&impx=184&doohv=0103&auct=3&sfe=1bbcf04f&vp=0",
+          "https://sandbox-ad.lynxssp.com/api/ad-exchange/tracking/event?adexchangeId=op6d7faa8-1744784597433&eventType=error&errorCode=[ERRORCODE]"
+        ]
+      }
+    }
+  }
+}
+```

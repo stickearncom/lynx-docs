@@ -566,7 +566,7 @@
           },
           {
             "group": "Playground",
-            "pages": ["api-reference/ad-serving/ad-request"]
+            "pages": ["api-reference/ad-serving/ad-request", "api-reference/ad-serving/ad-request-v2"]
           }
         ]
       }
