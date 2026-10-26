@@ -569,6 +569,19 @@
             "pages": ["api-reference/ad-serving/ad-request", "api-reference/ad-serving/ad-request-v2"]
           }
         ]
+      },
+      {
+        "tab": "Release Notes",
+        "anchors": [
+          {
+            "anchor": "12 October 2026",
+            "icon": "notes",
+            "pages": [
+              "untitled-page",
+              "untitled-page-2"
+            ]
+          }
+        ]
       }
     ]
   },
