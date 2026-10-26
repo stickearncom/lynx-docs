@@ -577,12 +577,14 @@
             "anchor": "12 October 2026",
             "icon": "notes",
             "pages": [
-              "untitled-page",
-              "untitled-page-2"
+              "untitled-page"
             ]
           },
           {
-            "anchor": "27 October 2026"
+            "anchor": "27 October 2026",
+            "pages": [
+              "untitled-page-2"
+            ]
           }
         ]
       }
