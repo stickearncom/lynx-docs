@@ -164,7 +164,8 @@
                 "pages": [
                   "documentation/creative-management/media-library/overview",
                   "documentation/creative-management/media-library/upload-creative",
-                  "documentation/creative-management/media-library/delete-creative"
+                  "documentation/creative-management/media-library/delete-creative",
+                  "documentation/creative-management/media-library/creative-variants"
                 ]
               },
               {
@@ -577,7 +578,12 @@
             "anchor": "12 October 2026",
             "icon": "notes",
             "pages": [
-              "untitled-page",
+              "untitled-page"
+            ]
+          },
+          {
+            "anchor": "27 October 2026",
+            "pages": [
               "untitled-page-2"
             ]
           }

@@ -1,1 +1,114 @@
+---
+title: "Creative Variants"
+sidebarTitle: "Creative Variants"
+---
 
+## Creative Variants
+
+**Planned release: 27 October 2026 — draft, not yet released.**
+
+Preparing separate video files for different screen resolutions adds manual work and makes asset selection harder. Creative Variants lets you generate resolution variants from an eligible video in the Media Library, then choose the version that fits your inventory.
+
+### What is changing
+
+For eligible MP4 video creatives, use the **Variant** action to generate resolution variants. Uploading a file and generating its variants are separate actions. The original file is kept as the **Master**, alongside the generated variants:
+
+<table>
+  <colgroup>
+    <col width="100" />
+    <col width="496" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Version</th>
+      <th>Resolution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Master</td>
+      <td>Original uploaded file</td>
+    </tr>
+    <tr>
+      <td>High</td>
+      <td>1920 × 1080</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>1280 × 720</td>
+    </tr>
+    <tr>
+      <td>Low</td>
+      <td>854 × 480</td>
+    </tr>
+  </tbody>
+</table>
+
+Each uploaded file and generated variant will have its own unique Creative ID. You will be able to select and assign each variant independently to the applicable inventory or campaign workflow.
+
+### How to use it after release
+
+1. Open the **Media Library** and select **Upload Creative** to upload your video.
+2. Check **Upload Manager** for upload progress and completion. Upload completion does not mean variant generation has completed.
+3. For an eligible MP4 video creative, select **Variant** to generate variants. Wait for generation to complete before using the generated versions.
+4. Select the version that fits your target inventory and assign it through the supported inventory or campaign workflow.
+
+### Find and review your creatives
+
+- Use **All Types** and **All Usage** to filter the library by creative type and usage.
+- Sort by **Newest first**, **Oldest first**, **Name A-Z**, or **Name Z-A**.
+- Review creative information in the table, including **Type**, **Format**, **Dimension**, and **Uploaded** date.
+
+No customer action is required before release. Generated variants are available after processing completes successfully.
+
+### What stays the same
+
+Images and Raw HTML5 creatives will not be transcoded. This planned update covers Creative Variants only; tagging, compliance, and analytics are not part of this release. The filters, sorting and table presentation described above accompany the demonstrated Media Library workflow.
+
+For the existing upload workflow, see [Upload Creative](/documentation/creative-management/media-library/upload-creative).
+
+### Illustrated walkthrough — all six design frames
+
+The supplied **Upload a File** design contains six frames. These are design references, not production screenshots. Upload completion remains separate from the manual **Variant** action. The action, generation progress, and campaign assignment are not pictured in this section.
+
+#### Frame 1 — Media Library
+
+Select **Upload Creative**. Expand the chevron to review related renditions, each with its own Creative ID, dimensions, size, and usage.
+
+![Frame 1 — Media Library](/images/releases/2026-10-27/creative-variants-frame-1-media-library.png)
+
+#### Frame 2 — Add Creative
+
+Use **Computer** and the **Drop files** area. **URL Link** is visible, but its entry form is outside this walkthrough.
+
+![Frame 2 — Add Creative](/images/releases/2026-10-27/creative-variants-frame-2-add-creative.png)
+
+#### Frame 3 — File picker
+
+Choose a local video, then select **Open**. The supplied example uses macOS; your operating system may look different.
+
+![Frame 3 — File picker](/images/releases/2026-10-27/creative-variants-frame-3-file-picker.png)
+
+#### Frame 4 — Uploading
+
+**Upload Manager** shows independent progress and **Uploading...** for each file.
+
+![Frame 4 — Uploading](/images/releases/2026-10-27/creative-variants-frame-4-uploading.png)
+
+#### Frame 5 — Upload complete
+
+A green check and **Complete** confirm file upload only, not variant generation.
+
+![Frame 5 — Upload complete](/images/releases/2026-10-27/creative-variants-frame-5-complete.png)
+
+#### Frame 6 — Review library renditions
+
+Review the expanded family, including the example 1920 × 1080, 1280 × 720, and 854 × 480 rows. Frames 1 and 6 are identical in the supplied design; this does not prove a newly generated asset or automatic generation.
+
+![Frame 6 — Media Library renditions](/images/releases/2026-10-27/creative-variants-frame-6-media-library-expanded.png)
+
+Read the [Creative Variants illustrated guide](/documentation/creative-management/media-library/creative-variants) for per-frame Figma links and interpretation. Mockup filenames, sizes, dates, progress percentages, and badge counts are illustrative, not upload limits or service guarantees. The existing upload guide lists **50 MB**; larger sample sizes in this design do not establish a changed limit.
+
+[Source design — Upload a File](https://www.figma.com/design/IGxLysHGOE8J9fRCddFjVG/Sprint---2026?node-id=7458-6461). Reviewed 27 October 2026.
+
+If a variant is missing or processing fails after release, contact your Lynx support team with the Master creative name, upload time, and expected resolution.
