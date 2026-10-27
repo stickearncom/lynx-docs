@@ -164,7 +164,8 @@
                 "pages": [
                   "documentation/creative-management/media-library/overview",
                   "documentation/creative-management/media-library/upload-creative",
-                  "documentation/creative-management/media-library/delete-creative"
+                  "documentation/creative-management/media-library/delete-creative",
+                  "documentation/creative-management/media-library/creative-variants"
                 ]
               },
               {
