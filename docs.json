@@ -590,7 +590,9 @@
           {
             "anchor": "02 November 2026",
             "pages": [
-              "releases/2026-11-02/creative-variants"
+              "releases/2026-11-02/creative-variants",
+              "releases/2026-11-02/device-telemetry",
+              "releases/2026-11-02/last-playlist-update"
             ]
           }
         ]
