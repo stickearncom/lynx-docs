@@ -575,6 +575,13 @@
         "tab": "Release Notes",
         "anchors": [
           {
+            "anchor": "03 November 2026",
+            "pages": [
+              "releases/2026-11-02/creative-variants",
+              "untitled-page-2"
+            ]
+          },
+          {
             "anchor": "12 October 2026",
             "icon": "notes",
             "pages": [
@@ -582,9 +589,10 @@
             ]
           },
           {
-            "anchor": "27 October 2026",
+            "anchor": "02 November 2026",
             "pages": [
-              "untitled-page-2"
+              "releases/2026-11-02/device-telemetry",
+              "releases/2026-11-02/last-playlist-update"
             ]
           }
         ],
