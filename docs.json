@@ -575,14 +575,6 @@
         "tab": "Release Notes",
         "anchors": [
           {
-            "anchor": "03 November 2026",
-            "pages": [
-              "releases/2026-11-02/creative-variants",
-              "releases/2026-11-03/pmp-deal-creation-v2-v1-fixed-price",
-              "untitled-page-2"
-            ]
-          },
-          {
             "anchor": "12 October 2026",
             "icon": "notes",
             "pages": [
@@ -594,6 +586,12 @@
             "pages": [
               "releases/2026-11-02/device-telemetry",
               "releases/2026-11-02/last-playlist-update"
+            ]
+          },
+          {
+            "anchor": "03 November 2026",
+            "pages": [
+              "releases/2026-11-02/creative-variants"
             ]
           }
         ],
